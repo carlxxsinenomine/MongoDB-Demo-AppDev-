@@ -3,7 +3,7 @@
 # MiniApp Idea: Book Inventory System(Yung kay pete HAHAAHHA)
 # Desc: Simple CRUD app lang na pedeng maimplement yung MongoDB basic operations such as, Add, Edit, Delete, tas Reading.
 
-### Todo 1: <Html> Create a table with 5 columns(Id, Title, Author, Description, Operations(Edit, Delete)), and an input tag/s para sa paginput ng books object.
+### Todo 1: <Html> Create a table with 5 columns(Id, Title, Author, Description, Operations(Edit, Delete)), and an input tag/s para sa paginput ng books object. (tapos na)
 ### Todo 2: <MongoDb> Create a Database(tas invite mo kami) in MongoDB, name the database BooksDB, and add a collection name it items. (tapos na)
 ### Todo 3: <JavaScript> Install the Mongodb package then create kayo ng connection.
 ### Todo 4: Create a new addItem(), it is responsible for storing items on the database(Simple lang munang func, ket hardcoded lang ung mga data for testing purposes).
