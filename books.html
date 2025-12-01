@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Management</title>
+    
+</head>
+
+<body style="font-family: Arial, sans-serif;">
+    
+    <h1>Books Management System</h1>
+    
+    <div>
+    
+        <h2>Add New Book</h2>
+        <table>
+    
+            <tr>
+                <td><label>ID:</label></td>
+                <td><input type="number" id="bookId"></td>
+            </tr>
+    
+            <tr>
+                <td><label>Title:</label></td>
+                <td><input type="text" id="bookTitle"></td>
+            </tr>
+    
+            <tr>
+                <td><label>Author:</label></td>
+                <td><input type="text" id="bookAuthor"></td>
+            </tr>
+    
+            <tr>
+                <td><label>Description:</label></td>
+                <td><textarea id="bookDescription"></textarea></td>
+            </tr>
+    
+            <tr>
+    
+                <td colspan="2">
+                    <button onclick="addBook()">Add Book</button>
+                    <button onclick="clearForm()">Clear</button>
+    
+                </td>
+    
+            </tr>
+    
+        </table>
+    </div>
+
+    <hr>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+    
+        <thead>
+    
+            <tr>
+    
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+    
+        <tbody id="booksTableBody"> </tbody>
+    
+    </table>
+
+    <script src="books.js"></script>
+
+</body>
+</html>
