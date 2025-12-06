@@ -1,4 +1,4 @@
-// IMPORTANT: Run 'npm install mongodb' before running this project
+// IMPORTANT: Run 'npm install mongodb' for every project folder to utilize the mongoDB library
 const { MongoClient } = require('mongodb');
 const URI = "mongodb://localhost:27017";
 
@@ -95,4 +95,5 @@ async function mongoOperations() {
 }
 
 // Execute the MongoDB operations
+
 mongoOperations();
