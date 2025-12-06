@@ -1,95 +1,98 @@
+// IMPORTANT: Run 'npm install mongodb' before running this project
 const { MongoClient } = require('mongodb');
-const URI = "mongodb://localhost:27017/";
+const URI = "mongodb://localhost:27017";
 
 const databaseName = "ComSci";
 const collectionName = "CS2A";
 
-async function MongoOperations() {
-
+async function mongoOperations() {
+    // Create MongoDB client
     const client = new MongoClient(URI);
 
     try {
-
+        // Connect to MongoDB server
         await client.connect();
-        console.log("MongoDB Database connected!");
-        
+        console.log("Connected!");
+
+        // Access database and collection
         const database = client.db(databaseName);
         const studentCollection = database.collection(collectionName);
 
-        console.log("Successfully loaded", collectionName, "from", databaseName);
-        
-        
+        console.log("Successfully loaded!");
+
+        // Create student documents
         const student1 = {
 
-            name : "Peter Andrew Bañares",
+            name : "Peter Bañares",
             age : 19,
-            studentNo : "2024-01-05444",
-            gwa : 2.9
+            gwa : 2.0
         };
 
         const student2 = {
 
-            name : "Gebhel Anselm Santos",
+            name : "Carl Muñoz",
             age : 19,
-            studentNo : "2024-01-02134",
-            gwa : 1.0
-        };
+            gwa : 1.1
 
-        /*let insertResult;
-        insertResult = await studentCollection.insertOne(student1);
-        console.log("Successfully inserted", student1.name);
+        }
+
+        const students = [student1, student2];
+
+        // INSERT: Add a single student to collection
+        let insertOneResult;
         
-        insertResult = await studentCollection.insertOne(student2);
-        console.log("Successfully inserted", student2.name);
-        */
+        insertOneResult = await studentCollection.insertOne(student1);
+        console.log("Successfully inserted one student!");
 
-        let students = [student1, student2];
+        // INSERT: Add multiple students to collection
+        let insertResult;
+
         insertResult = await studentCollection.insertMany(students);
+        console.log("Successfully inserted a student!");
 
+        // FIND: Query for a single student by name
         let findResult;
 
-        //FIND ONE
-        //findResult = await studentCollection.findOne({name : "Gebhel Anselm Santos"});
+        findResult = await studentCollection.findOne({name : "Carl Muñoz"})
+        console.log(findResult);
 
-        //if (!findResult) console.log("Student not found");
-        
-        //else console.log(findResult);
-        
-        //FIND MANY
-        //results = await studentCollection.find( {age : 19} ).toArray();
-        //console.log(results);
-    
-        //results = await studentCollection.find( {gwa : {$lt : 2.0}}).toArray();
-        //console.log(results);
+        // FIND: Query all students with GWA <= 2
+        studentarray = await studentCollection.find({gwa : {$lte : 2}}).toArray();
+        console.log(studentarray);
 
-        //FIND ALL 
-        //results = await studentCollection.find({}).toArray();
-        //console.log(results);
+        // UPDATE: Change a single student's name
+        let updateresult;
 
-        let updateResults;
+        updateresult = await studentCollection.updateOne({name : "Carl Muñoz"}, {$set : {name : "Gebhel Santos"}});
+        console.log(updateresult);
 
-        updateResults = await studentCollection.updateOne({name : "Gebhel Anselm Santos"}, { $set : {name : "Carl Muñoz"}});
-        console.log(updateResults);
+        // UPDATE: Change GWA for all students with GWA <= 2
+        let udpatedgwas;
+        udpatedgwas = await studentCollection.updateMany({gwa : {$lte : 2}}, {$set : {gwa : 1.1}});
+        console.log(udpatedgwas);
 
-        //updateResults = await studentCollection.updateMany({gwa : 3.0}, { $set : {gwa : 1.1}});
-        //console.log(updateResults);
+        // DELETE: Remove a single student by name
+        let deleteresult;
 
-        let deleteResult;
+        deleteresult = await studentCollection.deleteOne({name : "Gebhel Santos"});
+        console.log(deleteresult);
 
-        deleteResult = await studentCollection.deleteOne({name : "Carl Muñoz"});
-        console.log(deleteResult);
-
+        // DELETE: Remove all students with GWA >= 1.0
+        deleteresult = await studentCollection.deleteMany({gwa : {$gte : 1.0}});
+        console.log(deleteresult);
 
     }
-    catch(error) {
 
+    catch(error) {
+        // Handle any errors
         console.log("Error ", error);
     }
 
     finally {
+        // Close database connection
         client.close();
     }
-
 }
 
-MongoOperations();
+// Execute the MongoDB operations
+mongoOperations();
